@@ -10,7 +10,7 @@ The mandatory section of Libft involves crafting custom functions mirroring stan
 <ol>
   <li>Clone the repository:</li>
   <pre><code>https://github.com/Scelfo42/Libft_42.git</code></pre>
-  <h3>or with</h3>
+  <h4>or with</h4>
   <pre><code>git@github.com:Scelfo42/Libft_42.git</code></pre>
   <li>Move to the project's directory:</li>
   <pre><code>cd Libft</code></pre>
