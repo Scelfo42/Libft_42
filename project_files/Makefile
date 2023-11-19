@@ -4,13 +4,11 @@ CC	:=	clang
 
 DEBUG	:=	-g
 
-FLAGS	:=	-Wall -Wextra -Werror $(DEBUG)
+INCLUDE	:=	include/
 
-INCLUDE	:=	-I include/
+FLAGS	:=	-Wall -Wextra -Werror $(DEBUG) -I
 
 ARCL	:=	ar -crs
-
-OBJDIR	:=	objs/
 
 SRCS	:=	srcs/ft_bzero.c		\
 		srcs/ft_isalpha.c	\
@@ -71,7 +69,6 @@ WHITE = \033[0;97m
 
 # ======================================================================== #
 
-
 %.o : %.c
 	@$(CC) $(FLAGS) $(INCLUDE) -c $< -o $@
 	@echo "$(GREEN)Compiling:$(WHITE) $<"
@@ -79,23 +76,22 @@ WHITE = \033[0;97m
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	@$(ARCL) $(NAME) $(OBJS)
-	mkdir -p $(OBJDIR)
-	mv srcs/*.o $(OBJDIR)
-	@echo "$(YELLOW)- Library created: $(WHITE)${NAME}"
+	$(ARCL) $(NAME) $(OBJS)
+	@echo "$(YELLOW)- Program Name: $(WHITE)${NAME}"
 	@echo "$(YELLOW)- Compiler: $(WHITE)${CC}"
 	@echo "$(YELLOW)- Flags: $(WHITE)${FLAGS}"
+	@echo "$(YELLOW)- Includes: $(WHITE)${INCLUDE}"
 
 bonus: $(OBJS) $(BOBJS)
-	@$(ARCL) $(NAME) $(OBJS) $(BOBJS)
-	mv srcs/*.o $(OBJDIR)
-	@echo "$(YELLOW)- Library created: $(WHITE)${NAME}"
+	$(ARCL) $(NAME) $(OBJS) $(BOBJS)
+	@echo "$(YELLOW)- Program Name: $(WHITE)${NAME}"
 	@echo "$(YELLOW)- Compiler: $(WHITE)${CC}"
 	@echo "$(YELLOW)- Flags: $(WHITE)${FLAGS}"
+	@echo "$(YELLOW)- Includes: $(WHITE)${INCLUDE}"
 
 clean:
-	@rm -rf $(OBJDIR)
-	@echo "$(RED)All $(CYAN)$(NAME)$(RED)'s objects removed with $(WHITE)rm -rf $(YELLOW)"
+	@rm -f $(OBJS)
+	@echo "$(RED)All $(CYAN)$(NAME)$(RED)'s objects removed with $(WHITE)${RM} $(YELLOW)"
 
 fclean: clean
 	@rm -f $(NAME)
